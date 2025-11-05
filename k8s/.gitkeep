@@ -1,0 +1,6 @@
+# This directory will contain Kubernetes manifests
+# - api-gateway-deployment.yaml
+# - processor-service-deployment.yaml
+# - redis-deployment.yaml
+# - kafka configuration
+
