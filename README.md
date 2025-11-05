@@ -53,38 +53,58 @@ Client/Browser → API Gateway (Go + Gin) → Kafka → Processor Service → Re
 
 ## Quick Start
 
-### 1. Initialize Go Module
+### 1. Start All Services with Docker Compose
 
 ```bash
-go mod init github.com/<your-username>/Real-Time-Page-View-Tracking-System
+# Start all services (Kafka, Redis, API Gateway, etc.)
+make up
+
+# Or using docker-compose directly
+docker-compose up -d
 ```
 
-### 2. Run Locally (Coming Soon)
+### 2. Check Service Health
 
 ```bash
-docker-compose up
+# Check all services
+make health
+
+# Test API Gateway
+curl http://localhost:8080/health
 ```
 
-### 3. Test the API (Coming Soon)
+### 3. Access Web UIs
+
+- **API Gateway**: http://localhost:8080/health
+- **Kafka UI**: http://localhost:8090 (browse topics, messages)
+
+### 4. Run Without Docker (Local Development)
 
 ```bash
-curl -X POST http://localhost:8080/api/v1/track \
-  -H "Content-Type: application/json" \
-  -d '{
-    "user_id": "user123",
-    "page_url": "/home",
-    "timestamp": 1730814562
-  }'
+# Install dependencies
+go mod tidy
+
+# Run API Gateway
+go run cmd/api-gateway/main.go
 ```
+
+### 5. Stop Services
+
+```bash
+make down
+```
+
+For detailed Docker instructions, see [DOCKER_GUIDE.md](DOCKER_GUIDE.md)
 
 ## Development Progress
 
-- [x] Project initialization
-- [ ] API Gateway implementation
-- [ ] Processor Service implementation
-- [ ] Docker setup
-- [ ] Kubernetes deployment
-- [ ] Cloud deployment
+- [x] Project initialization (PR #1)
+- [x] API Gateway with health check (PR #2)
+- [x] Docker Compose setup (PR #3)
+- [ ] Track endpoint with Kafka producer (PR #4)
+- [ ] Processor Service implementation (PR #5-6)
+- [ ] Kubernetes deployment (PR #8-9)
+- [ ] Cloud deployment (PR #11 - Optional)
 
 ## License
 
