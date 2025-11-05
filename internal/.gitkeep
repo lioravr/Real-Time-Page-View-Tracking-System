@@ -1,0 +1,5 @@
+# This directory will contain internal packages
+# - models/
+# - kafka/
+# - redis/
+
