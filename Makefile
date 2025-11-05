@@ -53,15 +53,15 @@ health:
 	@docker exec redis redis-cli ping || echo "Redis not responding"
 	@echo ""
 	@echo "Checking Kafka..."
-	@docker exec kafka kafka-topics.sh --bootstrap-server localhost:9092 --list || echo "Kafka not responding"
+	@docker exec kafka kafka-topics --bootstrap-server localhost:9092 --list || echo "Kafka not responding"
 
 # List Kafka topics
 kafka-topics:
-	docker exec kafka kafka-topics.sh --bootstrap-server localhost:9092 --list
+	docker exec kafka kafka-topics --bootstrap-server localhost:9092 --list
 
 # Create the views topic manually (optional, auto-created by default)
 kafka-create-topic:
-	docker exec kafka kafka-topics.sh --bootstrap-server localhost:9092 \
+	docker exec kafka kafka-topics --bootstrap-server localhost:9092 \
 		--create --topic views --partitions 3 --replication-factor 1
 
 # Open Redis CLI
